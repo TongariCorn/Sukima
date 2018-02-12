@@ -643,9 +643,12 @@ int eval() {
 					continue;
 
 				case QUOTE:
+				{
+					Obj* next = getLastStack()->child->next;
 					replaceStack(getLastStack()->child->child);
-					proceedStack();
+					getLastStack()->child = next;
 					continue;
+				}
 
 				case EXPRESSION:
 					pushStack(getLastStack()->child->child);
